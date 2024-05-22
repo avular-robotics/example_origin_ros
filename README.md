@@ -5,9 +5,9 @@ In this repository you will learn the basics to interact with the robot using RO
 
 ## Outline
 1. [Short introduction on getting started](###getting-started)
-2. [Examples to acquire the position and velocity](navigation_examples/readme.md)
-3. [Examples to set the velocity](navigation_examples/readme.md)
-4. [Examples to set a behavior](behavior_examples/readme.md)
+2. [Examples to acquire the position and velocity](src/navigation_examples/readme.md)
+3. [Examples to set the velocity](src/navigation_examples/readme.md)
+4. [Examples to set a behavior](src/behavior_examples/readme.md)
 
 ### Getting started
 The Avular Origin has a build-in WiFi access-point and an ethernet port on its back. You therefore have two options to connect the Origin to your own computer:
