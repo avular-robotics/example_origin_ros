@@ -1,0 +1,20 @@
+# Service to update a saved map in the database, based on the provided map uuid
+# Note: you can not update the uuid
+
+# Unique id of the map
+string uuid # Required
+
+# New occupancy grid
+nav_msgs/OccupancyGrid occupancy_grid # Optional
+# New name of the map
+string name # Optional
+# New Coordinate information
+autonomy_msgs/CoordinateSystemInfo coord_info # Optional
+# New map metadata
+nav_msgs/MapMetaData meta_info # Optional
+
+---
+# Whether the map has been deleted successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

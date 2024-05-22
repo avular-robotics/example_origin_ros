@@ -1,0 +1,11 @@
+# Service to delete a saved path in the knowledge base
+
+# Id of the path to be deleted
+string uuid
+# String name of the  path to be deleted
+string name
+---
+# Whether the path has been deleted successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

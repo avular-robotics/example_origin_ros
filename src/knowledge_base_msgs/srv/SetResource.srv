@@ -1,0 +1,14 @@
+# Set a resource
+
+# The request field 'json' (mandatory) is a resource serialized as JSON string.
+# If the resource contain an uuid field, this uuid will be used when not existing.
+# If the resource does not contain an uuid field, the uuid will be generated.
+
+# The response field 'uuid' is the unique identifier assigned to the resource.
+# The 'uuid' field is a string hexadecimal representation of the 128-bit integer in the 8-4-4-4-12 format.
+# The response field 'result' provides information about the success and failure of the request.
+
+string json
+---
+string uuid
+Result result

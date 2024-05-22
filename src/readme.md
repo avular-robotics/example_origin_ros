@@ -1,4 +1,3 @@
-# HelloOrigin
 Welcome to the repository of code-examples for the Avular Origin
 
 In this repository you will learn the basics to interact with the robot using ROS2. This means that background knowledge on ROS2 is a must. Also, because our robot runs ROS2 Humble, we require for the examples in this repository that you run the code from a computer (or docker-image) in which ROS2-Humble is installed. If you don't have ROS2 Humble installed, please have a look on the [ROS2 install guide](https://docs.ros.org/en/humble/Installation.html), while if you have the feeling that you lack some background knowledge on ROS2, please have a look on the [ROS2 Tutorials](https://docs.ros.org/en/humble/Tutorials.html). Also, since our examples are written in Python, you may focus on the Python examples of the ROS2 tutorials.

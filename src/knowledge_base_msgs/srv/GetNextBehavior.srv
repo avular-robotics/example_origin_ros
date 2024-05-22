@@ -1,0 +1,10 @@
+# Empty request
+
+---
+# Behavior to be executed
+knowledge_base_msgs/Behavior behavior
+
+# Default response fields
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

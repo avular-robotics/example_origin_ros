@@ -1,0 +1,9 @@
+# Used to tell a node to use a certain coordinate system
+
+# Coordinate system info to be used
+autonomy_msgs/CoordinateSystemInfo info
+---
+# Whether setting the coordinate system was a success
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

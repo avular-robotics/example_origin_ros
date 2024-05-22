@@ -1,0 +1,13 @@
+## Service to acquire costmap
+## TODO e.nikolla: Discuss about the format of this service (https://avular.atlassian.net/browse/SPANAR-1367)
+
+
+geometry_msgs/PoseStamped[] goals
+geometry_msgs/PoseStamped start
+---
+# The requested costmap 
+knowledge_base_msgs/GlobalCostmap costmap
+# Whether the map has been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

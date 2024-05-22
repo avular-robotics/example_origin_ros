@@ -1,0 +1,8 @@
+# Service to pass the init pose in the knoweledge base
+
+geometry_msgs/PoseWithCovariance init_pose # initial pose
+---
+# Whether the pose has been saved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

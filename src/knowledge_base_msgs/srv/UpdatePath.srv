@@ -1,0 +1,19 @@
+# Service to update a saved path in the knowledge database, based on the provided path uuid
+# Note: you can not update the uuid
+
+# Saved unique id
+string uuid
+# New path name
+string name
+# New coordinate info
+autonomy_msgs/CoordinateSystemInfo coord_info
+# New poses
+# Note: You need to pass the entire stored array of poses including the new ones in order to successfully update this field.
+# Otherwise the stored poses that are saved but not updated will be overwritten to zero.
+autonomy_msgs/PoseWithTwist[] poses
+
+---
+# Whether the path has been deleted successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

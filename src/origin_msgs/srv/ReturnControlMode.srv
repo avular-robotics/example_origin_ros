@@ -1,0 +1,14 @@
+# Request to return the control mode either to NONE or PREVIOUS state depending on the service server
+
+# Mode expect to return the control mode from
+origin_msgs/ControlMode mode_from
+---
+# Whether the request was accepted
+# It can fail in the following cases:
+# * The current mode is not the expected mode as given
+bool success false
+
+# Message containing either:
+# * Success message
+# * Reason why the request failed/was rejected
+string message "Unexpected Error. Response message not set."

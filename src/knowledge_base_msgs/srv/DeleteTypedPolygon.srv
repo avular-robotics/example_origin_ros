@@ -1,0 +1,12 @@
+# Service to delete a saved polygon from the knowledge base
+
+# Id of the polygon to be deleted
+string uuid
+# String name of the  polygon to be deleted
+string name
+
+---
+# Whether the polygon has been deleted successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

@@ -1,0 +1,8 @@
+# Behaviors to be set and executed
+knowledge_base_msgs/Behavior[] behaviors
+
+---
+# Whether the behavior has been set successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

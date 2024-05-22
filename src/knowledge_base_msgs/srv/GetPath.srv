@@ -1,0 +1,13 @@
+# Service to retrieve a saved path from knowledge base
+
+# Id of the map to be retrieved
+string uuid
+# String name of the published map to be saved
+string name
+---
+# The requested map
+autonomy_msgs/Path path
+# Whether the map has been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

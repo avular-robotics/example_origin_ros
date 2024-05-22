@@ -1,0 +1,13 @@
+# Service to save a published path in the knowledge base
+
+# Id of the path
+string uuid # Optional
+# String name of the published path to be saved
+string name # Required
+---
+# id under which it has been saved in the knowledge base
+string uuid
+# Whether the path has been saved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

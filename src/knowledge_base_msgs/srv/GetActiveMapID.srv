@@ -1,0 +1,9 @@
+# Service to return the uuid of the published map from the knowledge base
+
+---
+# Id of used map
+string uuid
+# Whether the uuid is found
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

@@ -1,0 +1,27 @@
+# Request to enter low power mode
+
+# Whether to wake up from low power mode at pre-determined time.
+bool schedule_wakeup
+
+# Time to wake up at, in seconds since epoch in UTC time
+# Ignored if schedule_wakeup is set to false
+builtin_interfaces/Time wake_up_time
+
+---
+##
+## Return codes.
+##
+
+# Indicates the request was accepted without any errors.
+#
+# Succesfully entered low power mode.
+int8 ERROR_NONE=0
+
+# Indicates the request was rejected.
+#
+# The system is currently not able to enter low power mode.
+# This could be due to an invalid wake_up_time (for example, one in the past)
+int8 ERROR_REJECTED=1
+
+# Return code, see above definitions.
+int8 return_code

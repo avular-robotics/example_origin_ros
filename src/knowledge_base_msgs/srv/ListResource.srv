@@ -1,0 +1,11 @@
+# List resources
+
+# The requist field 'group_uuid' (optional) selects only the resources associated with the provided group.
+
+# The response field 'json' is a list of reduced resources serialized as JSON string.
+# The response field 'message' is a string elaborating the success value.
+
+string group_uuid
+---
+string json
+Result result

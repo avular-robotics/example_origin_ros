@@ -1,0 +1,4 @@
+---
+string state
+bool success false
+string message "Unexpected Error. Response message not set."

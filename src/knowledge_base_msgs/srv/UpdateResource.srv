@@ -1,0 +1,14 @@
+# Update a resource.
+# Updating a resource makes a copy of the original resource, modifies the provided fields and stores the modified resource with a new unique identifier.
+
+# The request field 'json' (mandatory) is a resource serialized as JSON string.
+# This resource must containe an uuid, and requires only fields that needs an update. Other fields are kept as is.
+
+# The response field 'uuid' is the unique identifier assigned to the modified resource.
+# The 'uuid' field is a string hexadecimal representation of the 128-bit integer in the 8-4-4-4-12 format.
+# The response field 'message' is a string elaborating the success value.
+
+string json
+---
+string uuid
+Result result

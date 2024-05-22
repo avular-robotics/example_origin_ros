@@ -1,0 +1,9 @@
+# Service to unexecute a job in the database
+
+# Id of the job to be unexecuted
+string uuid
+---
+# Whether the job has been executed successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

@@ -1,0 +1,13 @@
+# Service to save a published occupancy grid in the knoweledge base
+
+# Id of the map
+string uuid  # Optional
+# String name of the published map to be saved
+string name  # Required
+---
+# Id under which it has been saved in the knowledge base
+string uuid
+# Whether the map has been saved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

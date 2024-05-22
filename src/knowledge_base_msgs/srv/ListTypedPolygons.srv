@@ -1,0 +1,8 @@
+# Empty request
+---
+# List of polygons
+knowledge_base_msgs/TypedPolygon[] polygons
+# Whether the polygons have been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

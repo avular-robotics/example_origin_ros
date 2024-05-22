@@ -1,0 +1,13 @@
+# Service to retrieve an occupancy grid from knoweledge base
+
+# Id of the map to be retrieved
+string uuid
+# String name of the saved map to be retrieved
+string name
+---
+# The requested map
+autonomy_msgs/GridMap2D map
+# Whether the map has been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

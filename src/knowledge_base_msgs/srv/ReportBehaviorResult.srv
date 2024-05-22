@@ -1,0 +1,20 @@
+# Possible codes:
+# Behavior was completed with the desired result
+uint8 SUCCEEDED=0
+# Behavior was completed but not with the desired result
+uint8 FAILED=1
+# Behavior was canceled by the user
+uint8 CANCELED=2
+
+# UUID of behavior that the result is reported of
+string uuid
+# Code of the result (see above for the options)
+uint8 code
+# Optional message of the behavior result
+string message
+
+---
+# Default response fields
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

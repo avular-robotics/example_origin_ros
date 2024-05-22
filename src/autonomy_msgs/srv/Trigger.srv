@@ -1,0 +1,4 @@
+# This service has the same fields as std_srvs/Trigger, but then with default values.
+---
+bool success false
+string message "Unexpected Error. Response message not set."

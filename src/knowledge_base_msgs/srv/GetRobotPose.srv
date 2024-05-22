@@ -1,0 +1,8 @@
+# Empty request
+---
+# The robot pose
+geometry_msgs/PoseWithCovarianceStamped pose
+# Whether the pose have been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

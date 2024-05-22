@@ -1,0 +1,6 @@
+# Stop any running Job
+
+# The response field 'result' provides information about the success and failure of the request.
+
+---
+Result result

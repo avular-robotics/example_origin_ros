@@ -1,0 +1,15 @@
+# Service to obtain a list of all paths which are stored in the autopilot knowledge base
+
+# Empty request
+---
+# List of paths with their uuid and human readable names
+knowledge_base_msgs/PathId[] paths
+# Whether the paths have been obtained successfully
+# This can fail if the autopilot knowledge base:
+# * Failed to start properly
+# * Is unreachable
+# * Is in an error state
+# In case it fails, the reason will be reported in the message field.
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

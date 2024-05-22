@@ -1,0 +1,11 @@
+# Service to retrieve pose information based on aruco marker Id
+
+# Id of the detected aruco
+uint8 id
+---
+# The requested pose
+geometry_msgs/PoseStamped aruco_pose
+# Default response fields
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

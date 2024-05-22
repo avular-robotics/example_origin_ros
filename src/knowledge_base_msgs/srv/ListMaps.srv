@@ -1,0 +1,8 @@
+# Empty request
+---
+# List of maps
+autonomy_msgs/GridMap2D[] maps
+# Whether the maps have been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

@@ -1,0 +1,15 @@
+# Request to set the control mode to the desired mode
+
+# Desired mode
+origin_msgs/ControlMode mode
+---
+# Whether the request was accepted
+# It can fail in the following cases:
+# * The transition was not allowed.
+# * The target mode is not in the set of known control modes
+bool success false
+
+# Message containing either:
+# * Success message
+# * Reason why the request failed/was rejected
+string message "Unexpected Error. Response message not set."

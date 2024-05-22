@@ -1,0 +1,12 @@
+# Service to save a polygon in the knowledge base
+
+# Polygon object
+knowledge_base_msgs/TypedPolygon polygon
+
+---
+# Id under which it has been saved in the knowledge base
+string uuid
+# Whether the polygon has been saved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

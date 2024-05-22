@@ -1,0 +1,12 @@
+# Service to delete a saved map in the knowledge base
+
+# Id of the map to be deleted
+string uuid
+# String name of the  map to be deleted
+string name
+
+---
+# Whether the map has been deleted successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

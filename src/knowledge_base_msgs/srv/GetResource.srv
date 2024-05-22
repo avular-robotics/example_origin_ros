@@ -1,0 +1,11 @@
+# Get resource based on UUID
+
+# The request field 'uuid' (mandatory) is a string hexadecimal representation of the 128-bit integer in the 8-4-4-4-12 format.
+
+# The response field 'json' is a resource serialized as JSON string.
+# The response field 'result' provides information about the success and failure of the request.
+
+string uuid
+---
+string json
+Result result

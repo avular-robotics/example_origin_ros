@@ -1,0 +1,12 @@
+# Service to load a nav msgs occupancy grid map for localization purposes
+
+# Id of the map to be deleted
+string uuid
+# String name of the  map to be deleted
+string name
+
+---
+# Whether the map has been published successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

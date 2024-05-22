@@ -1,0 +1,1 @@
+The Avular Origin is a 4-wheeled robot. It maneuvers by following a forwards speed or an angular rate. 

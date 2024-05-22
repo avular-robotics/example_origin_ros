@@ -1,0 +1,10 @@
+# Empty request
+
+---
+# List of jobs
+knowledge_base_msgs/Job[] jobs
+
+# Whether the jobs have been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."
