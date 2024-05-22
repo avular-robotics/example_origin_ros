@@ -3,27 +3,25 @@ Welcome to the repository of code-examples for the Avular Origin
 
 In this repository you will learn the basics to interact with the robot using ROS2. This means that background knowledge on ROS2 is a must. Also, because our robot runs ROS2 Humble, we require for the examples in this repository that you run the code from a computer (or docker-image) in which ROS2-Humble is installed. If you don't have ROS2 Humble installed, please have a look on the [ROS2 install guide](https://docs.ros.org/en/humble/Installation.html), while if you have the feeling that you lack some background knowledge on ROS2, please have a look on the [ROS2 Tutorials](https://docs.ros.org/en/humble/Tutorials.html). Also, since our examples are written in Python, you may focus on the Python examples of the ROS2 tutorials.
 
-## Outline
-1. [Short introduction on getting started](###getting-started)
+## Outline of the code example
+1. [Short introduction on getting started](src.readme.md)
 2. [Examples to acquire the position and velocity](src/navigation_examples/readme.md)
 3. [Examples to set the velocity](src/navigation_examples/readme.md)
 4. [Examples to set a behavior](src/behavior_examples/readme.md)
 
-### Getting started
-The Avular Origin has a build-in WiFi access-point and an ethernet port on its back. You therefore have two options to connect the Origin to your own computer:
-1. By connecting your computer to the WiFi network of the robot, which is typically called `orgin-x-AP`, where x being the number of your Origin.
-2. By mounting a companion PC on the back of the Origin, such as a Raspberry-PI, and connect a TCP cable between the Origin and your companion PC.
-    * Note that this option would also require a wifi connection between your computer and the companion PC for you to SSH into the companion PC.
-    * Note that this option also implies that all communication between your code (running on the companion PC) and the robot is most stable as there is a wired and not a wireless connection between the two. Which can be usefull when bulky sendor data, such as LiDAR messages and camera images, and velocity commands are exchanged at high rates.
+## Setting up
+The Origin supports a ROS2 interface that you may use to interact your local machine with your Origin, for example using your laptop or a companion PC (Raspberry PI 4/5). The interface is made in ROS2 Humble, so you are required to either run ROS2 Humble on you local machine as well. An alternative would be to run a docker container. There are multiple images for ROS2 Humble, depending on how many packages you want to have pre-installed automatically. Since you will be developing, I would advise you to pull the 'desktop' or the 'perception' version of Humble rather than its 'core' or 'base' version. Assuming that you have installed en setup docker, you may pull one of the following images. 
+```
+docker pull osrf/ros:humble-desktop
+```
+or
+```
+docker pull osrf/ros:humble-perception
+```
+Before you continue with setting up the code example of this repository, please read this [short introduction]((src.readme.md) on how to setup the ROS2 interface between the Origin and your local machine.
 
-The ROS2 network of the robot is defined as a local network on the robot. This is to ensure that communication from a software of a user is not effecting the performance of the robot itself (up to some point). To make a connection with this local ROS2 network we make use of a so-called zenoh-bridge. The one side of the zenoh-bridge is already running in the robot's local ROS2 network. The other end of the zenoh-brigde should be running on your computer. Once that zenoh-bridge is up and running your computer has access to the ROS2 topics and services of the Origin. To setup this zenoh-bridge please take the following steps:
-1. Install zenoh
-2. Install CycloneDDS
-3. Export CycloneDDS
-4. Start the zenoh-bridge
-5. check the connection
 
-After these steps you are ready to setup this repository as a ROS2 workspace on your computer. This is simlar to the examples in the ROS2 tutorial on [creating your own package](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html), with some changes on where to copy this repository and install some dependencies.
+Now you are ready to setup this repository as a ROS2 workspace on your machine (or inside the docker container). This is simlar to the examples in the ROS2 tutorial on [creating your own package](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html), with some changes on where to copy this repository and install some dependencies.
 
 First you will need to make a new folder, which will be your ROS2 workspace using the following command
 ```
@@ -54,7 +52,7 @@ HelloOrigin
 The folders that finish with '_examples' are ROS2 packages containing Python ROS2-examples related to robot behaviors, robot navigation and robot perception. The other three folders that finish with '_msgs' are ROS2 packages that define specific message formats that are used by the Origin. You will need these messages in the workspace so that the ROS2 topics and services can be recieved and processed by your computer. 
 
 
-In the last two steps you will install some dependencies, such as the nav2 messages of the [ROS2 navigation stack](https://navigation.ros.org/), the geomtry and sensor messages of ROS2 that should come with you basic install of ROS2 Humble, and some frequently used Python packages being [numpy](https://numpy.org/) and [sciy](https://scipy.org/).
+In the last two steps you will install some dependencies, such as the nav2 messages of the [ROS2 navigation stack](https://navigation.ros.org/), the geomtry and sensor messages of ROS2 that should come with you basic install of ROS2 Humble, and some frequently used Python packages being [numpy](https://numpy.org/) and [scipy](https://scipy.org/).
 ```
 sudo apt install ros-humble-nav2-msgs
 pip3 install numpy scipy
