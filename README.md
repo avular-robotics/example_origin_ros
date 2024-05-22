@@ -31,30 +31,35 @@ mkdir HelloOrigin
 ```
 Then you clone this repository into the folder as follows
 ```
-git clone blablabla
+git clone https://github.com/jorissijs/HelloOrigin.git
 ```
-When you now go into the src folder you will see the following structure. The first tree folders are ROS2 packages containing Python ROS2-examples related to robot behaviors, robot navigation and robot perception. The other two folders are ROS2 packages that define specific message formats that are used by the Origin. You will need these messages in the workspace so that the ROS2 topics and services can be recieved and processed by your computer. 
+When entering the src folder you will see the following structure.
 ```
 HelloOrigin
  |
  --- src
       |
+      --- autonomy_msgs
+      |
       --- behavior_examples
+      |
+      --- knowledge_base_msgs
       |
       --- navigation_examples
       |
       --- perception_examples
       |
-      --- origin_msgs
-      |
-      --- knowledge_base_msgs
+      --- origin_msgs      
 ```
+The folders that finish with '_examples' are ROS2 packages containing Python ROS2-examples related to robot behaviors, robot navigation and robot perception. The other three folders that finish with '_msgs' are ROS2 packages that define specific message formats that are used by the Origin. You will need these messages in the workspace so that the ROS2 topics and services can be recieved and processed by your computer. 
+
+
 In the last two steps you will install some dependencies, such as the nav2 messages of the [ROS2 navigation stack](https://navigation.ros.org/), the geomtry and sensor messages of ROS2 that should come with you basic install of ROS2 Humble, and some frequently used Python packages being [numpy](https://numpy.org/) and [sciy](https://scipy.org/).
 ```
 sudo apt install ros-humble-nav2-msgs
 pip3 install numpy scipy
 ```
-At this moment you are ready to start the examples of this repository. The prefered order of examples is to start with the [navigation_examples]((navigation_examples/readme.md)), in which you will echo velocity and position and set velocity. After that you may continue to the [perception_examples](perception_examples/readme.md) on getting the closest obstruction in the vicinity of the Origin. The [behavior_examples](behvaior_examples/readme.md) are the last examples of this tutorial, in which you will learn how to sent a command to the Origin for it to execute a behavior, such as a move to or a wait.
+At this moment you are ready to start the examples of this repository. The prefered order of examples is to start with the [navigation_examples]((src/navigation_examples/readme.md)), in which you will echo velocity and position and set velocity. After that you may continue to the [perception_examples](src/perception_examples/readme.md) on getting the closest obstruction in the vicinity of the Origin. The [behavior_examples](src/behavior_examples/readme.md) are the last examples of this tutorial, in which you will learn how to sent a command to the Origin for it to execute a behavior, such as a move to or a wait.
 
 After these three basic examples you should be able to create you own ROS2-packages that interface with the robot, in which you can develop you own application.
 
