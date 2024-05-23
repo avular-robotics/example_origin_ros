@@ -63,7 +63,7 @@ colcon build --symlink-install
 ```
 The argument '--symlink-install' will allow you to modify python-code without the need to rebuild the workspace.
 
-The prefered order of examples is to start with the [navigation_examples]((src/navigation_examples/readme.md)), in which you will echo velocity and position and set velocity. After that you may continue to the [perception_examples](src/perception_examples/readme.md) on getting the closest obstruction in the vicinity of the Origin. The [behavior_examples](src/behavior_examples/readme.md) are the last examples of this tutorial, in which you will learn how to sent a command to the Origin for it to execute a behavior, such as a move to or a wait.
+The prefered order of examples is to start with the [navigation_examples](src/navigation_examples/readme.md), in which you will echo velocity and position and set velocity. After that you may continue to the [perception_examples](src/perception_examples/readme.md) on getting the closest obstruction in the vicinity of the Origin. The [behavior_examples](src/behavior_examples/readme.md) are the last examples of this tutorial, in which you will learn how to sent a command to the Origin for it to execute a behavior, such as a move to or a wait.
 
 After these three basic examples you should be able to create you own ROS2-packages that interface with the robot, in which you can develop you own application.
 

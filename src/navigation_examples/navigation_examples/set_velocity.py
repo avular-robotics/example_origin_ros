@@ -54,8 +54,8 @@ class SetVelocity(Node):
         self.velocity_msg.linear.x = 0.5 	# meters per second
         self.velocity_msg.angular.z = 0.0	# radians per second
         # create a service for acquiring and releasing control of the robot
-        self.request_control = ClientService(self, srv_type=SetControlMode, srv_name='cmd_vel_controller/set_control_mode')
-        self.release_control = ClientService(self, srv_type=ReturnControlMode, srv_name='cmd_vel_controller/reset_control_mode')
+        self.request_control = ClientService(self, srv_type=SetControlMode, srv_name='/robot/cmd_vel_controller/set_control_mode')
+        self.release_control = ClientService(self, srv_type=ReturnControlMode, srv_name='/robot/cmd_vel_controller/reset_control_mode')
         timer_period = 0.1  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)        
         

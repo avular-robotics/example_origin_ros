@@ -15,6 +15,7 @@
 import rclpy
 from rclpy.node import Node
 
+from geometry_msgs.msg import PoseStamped
 from knowledge_base_msgs.msg import Behavior
 from knowledge_base_msgs.srv import SetAndExecuteBehaviors
 
@@ -53,7 +54,7 @@ class SetBehavior(Node):
         # create a service-client for setting a behavior to the robot
         self.add_behavior = ClientService(self, srv_type=SetAndExecuteBehaviors, srv_name='/autopilot/information_manager/set_and_execute_behaviors')
         
-    def create_behavior(self, type, parameters):
+    def create_behavior(self, behavior_type, parameters):
         # create the desired behavior
         behavior = Behavior()
         behaviors = []
@@ -71,7 +72,7 @@ class SetBehavior(Node):
                 pose.pose.orientation.y = quaternions[1]
                 pose.pose.orientation.z = quaternions[2]
                 pose.pose.orientation.w = quaternions[3]
-                if user_input[0:n] == 'move_to_global'
+                if behavior_type == 'move_to_global':
                     pose.header.frame_id = "map"
                 else:
                     pose.header.frame_id = "base_link"
@@ -105,8 +106,11 @@ def main(args=None):
 
     while user_input != 'quit':
         n = user_input.find(":")
-        behavior_type = user_input[0:n]:
-        parameters = float(user_input[n+2:])
+        behavior_type = user_input[0:n]
+        parameter_list = user_input[n+2:].split()
+        parameters = []
+        for par in parameter_list:
+            parameters.append(float(par))
         behaviors = set_behavior.create_behavior(behavior_type, parameters)
         
         if len(behaviors) > 0:
