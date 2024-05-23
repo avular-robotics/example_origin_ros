@@ -24,7 +24,7 @@ class VelocitySubscriber(Node):
     def __init__(self):
         super().__init__('velocity_subscriber')
         # create a subscriber to the robot's velocity
-        self.cmdvel_subscription = self.create_subscription(Odometry, 'autopilot/estimated_pose',  self.velocity_callback, 10)
+        self.cmdvel_subscription = self.create_subscription(Odometry, 'robot/odom',  self.velocity_callback, 10)
         self.cmdvel_subscription    # prevent unused variable warning
         self.get_logger().info('velocity subscriber is initialized')
 
