@@ -16,7 +16,7 @@ import rclpy
 from rclpy.node import Node
 
 from geometry_msgs.msg import PoseStamped
-from knowledge_base_msgs.msg import Behavior
+from knowledge_base_msgs.msg import Behavior, Constraint, Policy
 from knowledge_base_msgs.srv import SetAndExecuteBehaviors
 
 #from avular_utils import ClientService
@@ -60,7 +60,6 @@ class SetBehavior(Node):
         behaviors = []
         if behavior_type == 'move_to_global' or behavior_type == 'move_to_relative':
             waypoint = parameters
-            print(waypoint)
             if len(waypoint) == 3:
                 behavior.type = Behavior.MOVE_THROUGH_POSES
                 pose = PoseStamped()
@@ -77,16 +76,17 @@ class SetBehavior(Node):
                 else:
                     pose.header.frame_id = "base_link"
                 behavior.goals.append(pose)
+                behavior.policy.max_speed = 1.0
                 behaviors.append(behavior)
             else:
-                print('cannot set behavior: unknown number of inputs')
+                self.get_logger().info('cannot set behavior: unknown number of inputs')
         elif behavior_type == 'wait':
-            waiting_time = parameters
+            waiting_time = parameters[0]
             behavior.type = Behavior.WAIT
             behavior.constraint.time = waiting_time
             behaviors.append(behavior)
         else:
-            print('cannot set behavior: unknown type of behavior')
+            self.get_logger().info('cannot set behavior: unknown type of behavior')
         
         return behaviors
 

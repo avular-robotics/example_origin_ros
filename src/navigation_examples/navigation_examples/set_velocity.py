@@ -20,7 +20,6 @@ from origin_msgs.msg import ControlMode
 from origin_msgs.srv import SetControlMode
 from origin_msgs.srv import ReturnControlMode
 
-#from avular_utils import ClientService
 import numpy as np
 
 NR_RETRIES = 3
@@ -74,22 +73,24 @@ def main(args=None):
     req1 = SetControlMode.Request()
     req1.mode.mode = ControlMode.USER
     result = set_velocity.request_control.make_request(request_msg = req1)
-    print(result.message)
-    # sent velocity commands
-    t_now = set_velocity.get_clock().now().nanoseconds
-    t_start = t_now
-    t_old = t_now - 100000000
-    while t_now - t_start < 1000000000:
-        #set_velocity.get_logger().info(f"{t_now - t_start}")
+    if result.success == True:
+        set_velocity.get_logger().info('Obtained control of the robot')
+        # sent velocity commands
         t_now = set_velocity.get_clock().now().nanoseconds
-        if t_now - t_old > 99999999:
-            rclpy.spin_once(set_velocity)
-            t_old = t_now
-    # request control of the robot's velocity
-    req2 = ReturnControlMode.Request()
-    req2.mode_from.mode = ControlMode.USER
-    result = set_velocity.release_control.make_request(request_msg = req2)
-    print(result.message)
+        t_start = t_now
+        t_old = t_now - 100000000               # miliseconds
+        while t_now - t_start < 1000000000:     # miliseconds
+            t_now = set_velocity.get_clock().now().nanoseconds
+            if t_now - t_old > 99999999:
+                rclpy.spin_once(set_velocity)
+                t_old = t_now
+        # request control of the robot's velocity
+        req2 = ReturnControlMode.Request()
+        req2.mode_from.mode = ControlMode.USER
+        result = set_velocity.release_control.make_request(request_msg = req2)
+        set_velocity.get_logger().info('Done sending velocities, and released control of the robot')
+    else:
+        set_velocity.get_logger().info('Could not obtain control of the robot')
            
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
