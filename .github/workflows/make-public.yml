@@ -1,0 +1,29 @@
+name: Make public
+
+on:
+  push:
+    branches:
+      - main
+      - release/**
+
+env:
+  TARGET_REPOSITORY: "avular-robotics/example_origin_ros"
+    
+jobs:
+  make_public:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+          fetch-depth: 0
+          token: ${{ secrets.CI_ACCESS_TOKEN }}
+          persist-credentials: true
+
+      - name: Make public
+        run: |
+          # Set the remote URL to the public repository
+          git remote add public https://github.com/${{ env.TARGET_REPOSITORY }}.git
+          # Push the changes for the active branch
+          git push public HEAD:${{ github.ref }}
