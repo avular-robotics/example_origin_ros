@@ -18,22 +18,22 @@ or
 ```
 docker pull osrf/ros:humble-perception
 ```
-Before you continue with setting up the code example of this repository, please read this [short introduction]((src.readme.md) on how to setup the ROS2 interface between the Origin and your local machine.
+Before you continue with setting up the code example of this repository, please read this [short introduction](src/readme.md) on how to setup the ROS2 interface between the Origin and your local machine.
 
 
 Now you are ready to setup this repository as a ROS2 workspace on your machine (or inside the docker container). This is simlar to the examples in the ROS2 tutorial on [creating your own package](https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html), with some changes on where to copy this repository and install some dependencies.
 
 First you will need to make a new folder, which will be your ROS2 workspace using the following command
 ```
-mkdir HelloOrigin
+mkdir example_origin_ros
 ```
 Then you clone this repository into the folder as follows
 ```
-git clone https://github.com/jorissijs/HelloOrigin.git
+git clone https://github.com/avular-robotics/example_origin_ros.git
 ```
 When entering the src folder you will see the following structure.
 ```
-HelloOrigin
+example_origin_ros
  |
  --- src
       |
@@ -52,17 +52,21 @@ HelloOrigin
 The folders that finish with '_examples' are ROS2 packages containing Python ROS2-examples related to robot behaviors, robot navigation and robot perception. The other three folders that finish with '_msgs' are ROS2 packages that define specific message formats that are used by the Origin. You will need these messages in the workspace so that the ROS2 topics and services can be recieved and processed by your computer. 
 
 
-In the last two steps you will install some dependencies, such as the nav2 messages of the [ROS2 navigation stack](https://navigation.ros.org/), the geomtry and sensor messages of ROS2 that should come with you basic install of ROS2 Humble, and some frequently used Python packages being [numpy](https://numpy.org/) and [scipy](https://scipy.org/).
+In the last two steps you will install some dependencies, such as the nav2 messages of the [ROS2 navigation stack](https://navigation.ros.org/), the geometry and sensor messages of ROS2 that should come with you basic install of ROS2 Humble, and some frequently used Python packages being [numpy](https://numpy.org/) and [scipy](https://scipy.org/).
 ```
 sudo apt install ros-humble-nav2-msgs
 pip3 install numpy scipy
 ```
-At this moment you are ready to start the examples of this repository. To do so you must first build the ROS2 packages in this workspace. Navigate into the top folder "HelloOrigin' and run the following command
+At this moment you are ready to start the examples of this repository. To do so you must first build the ROS2 packages in this workspace. Navigate into the top folder "example_origin_ros' and run the following command
 ```
 colcon build --symlink-install
 ```
 The argument '--symlink-install' will allow you to modify python-code without the need to rebuild the workspace.
 
+After building the workspace, remember to source the newly installed packages from the top folder "example_origin_ros' and run the following command
+```
+source install/setup.bash
+```
 The prefered order of examples is to start with the [navigation_examples](src/navigation_examples/readme.md), in which you will echo velocity and position and set velocity. After that you may continue to the [perception_examples](src/perception_examples/readme.md) on getting the closest obstruction in the vicinity of the Origin. The [behavior_examples](src/behavior_examples/readme.md) are the last examples of this tutorial, in which you will learn how to sent a command to the Origin for it to execute a behavior, such as a move to or a wait.
 
 After these three basic examples you should be able to create you own ROS2-packages that interface with the robot, in which you can develop you own application.
