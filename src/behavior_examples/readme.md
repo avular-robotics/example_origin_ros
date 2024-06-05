@@ -8,6 +8,8 @@ Each of the above functionalities have additional ROS2 topics, services and acti
 
 The concept of a behavior is a piece of information to the robot as it informs the robot what a user would like the robot to do. For that reason, a behavior and its parameters, such as constraint and policy, are managed by the knowledge-base and the information manager. This knowledge-base processes the incoming behaviors on validity and the information manager keeps track of the llist of behaviors that is to be executed. Another functionality in the robot continuously polls the information manager on which behavior is to be executed next, which is then removed from the list in case the behavior was executed succesfully.
 
+This example only requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference.
+
 To run the example of commanding behaviors navigate into the 'HelloOrigin' workspace and run
 ```
 source install/setup.bash

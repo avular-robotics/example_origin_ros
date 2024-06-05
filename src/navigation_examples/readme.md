@@ -8,6 +8,8 @@ The Avular Origin uses its IMU and wheel encoder for keeping track of its curren
 The Avular Origin has a path-planning functionality. An example on how to exploit this funcitonality is not presented here in the navigation examples but in the packages on [behavior examples](behavior_examples/readme.md).
 
 ## Acquiring speed
+This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference).
+
 To run the example of acquiring the Origin's position you need to navigate into the 'HelloOrigin' workspace and run
 ```
 source install/setup.bash
@@ -70,6 +72,8 @@ if __name__ == '__main__':
 is a typical python implementation of linking the main functionality of the python routine.
 
 ## Acquiring position
+This example only requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference. You may create a similar example that does not require the Autopilot Inference by changing the topic of the subscriber from 'autopilot/estimated_pose' to 'robot/odom'.
+
 To run the example of acquiring the Origin's speed you need to navigate into the 'HelloOrigin' workspace and run
 ```
 source install/setup.bash
@@ -139,6 +143,8 @@ is a typical python implementation of linking the main functionality of the pyth
 
 
 ## Setting a reference speed
+This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference).
+
 To run the example of setting the Origin's speed you need to navigate into the 'HelloOrigin' workspace and run
 ```
 source install/setup.bash
