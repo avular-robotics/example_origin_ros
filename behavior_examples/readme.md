@@ -10,14 +10,14 @@ The concept of a behavior is a piece of information to the robot as it informs t
 
 This example only requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference.
 
-To run the example of commanding behaviors navigate into the 'HelloOrigin' workspace and run
+To run the example of commanding behaviors navigate into the ROS2 workspace and run
 ```
 source install/setup.bash
 ros2 run behavior_examples set_behavior
 ```
 Once the node started it will print the options in the terminal on how a user may command one of the three behaviors, and wait for the user input. When the user provides its input, according to the proper format, the robot will start executing the behavior that was called according to the parameters that were provided.
 
-The python code of this ROS2 node is found in the 'HelloOrigin/src/behavior_examples/behavior_examples/set_behavior.py'. The remainder of this section explains the code in more detail.
+The python code of this ROS2 node is found in the 'behavior_examples/behavior_examples/set_behavior.py'. The remainder of this section explains the code in more detail.
 
 The first part of the code, i.e.,
 ```

@@ -10,14 +10,14 @@ The Avular Origin has a path-planning functionality. An example on how to exploi
 ## Acquiring speed
 This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference).
 
-To run the example of acquiring the Origin's position you need to navigate into the 'HelloOrigin' workspace and run
+To run the example of acquiring the Origin's position you need to navigate into the ROS2 workspace and run
 ```
 source install/setup.bash
 ros2 run navigation_examples get_velocity
 ```
 Once the node started it will print the current speed and angular rate in the terminal. 
 
-The python code of this ROS2 node is found in the 'HelloOrigin/src/navigation_examples/navigation_examples/get_velocity.py'. The remainder of this section explains the code in more detail.
+The python code of this ROS2 node is found in the 'navigation_examples/navigation_examples/get_velocity.py'. The remainder of this section explains the code in more detail.
 
 The first part of the code, i.e.,
 ```

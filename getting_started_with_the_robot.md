@@ -1,4 +1,5 @@
 ## Getting started
+This README explains how to connect to the physical robot. You do not need to perform these steps if you use the simulation environment.
 The Avular Origin has a build-in WiFi access-point and an ethernet port on its back. You therefore have two options to connect the Origin to your own computer:
 1. By connecting your computer to the WiFi network of the robot, which is typically called `orgin-x-AP`, where x being the number of your Origin.
 2. By mounting a companion PC on the back of the Origin, such as a Raspberry-PI, and connect a TCP cable between the Origin and your companion PC.
