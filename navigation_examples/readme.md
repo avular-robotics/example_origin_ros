@@ -8,7 +8,7 @@ The Avular Origin uses its IMU and wheel encoder for keeping track of its curren
 The Avular Origin has a path-planning functionality. An example on how to exploit this funcitonality is not presented here in the navigation examples but in the packages on [behavior examples](behavior_examples/readme.md).
 
 ## Acquiring speed
-This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference).
+This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference (it will thus work with the Origin One simulation).
 
 To run the example of acquiring the Origin's position you need to navigate into the ROS2 workspace and run
 ```
@@ -72,16 +72,16 @@ if __name__ == '__main__':
 is a typical python implementation of linking the main functionality of the python routine.
 
 ## Acquiring position
-This example only requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference. You may create a similar example that does not require the Autopilot Inference by changing the topic of the subscriber from 'autopilot/estimated_pose' to 'robot/odom'.
+This example only requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference (it will thus <u>not</u> work with the Origin One simulation). You may create a similar example that does not require the Autopilot Inference by changing the topic of the subscriber from 'autopilot/estimated_pose' to 'robot/odom'.
 
-To run the example of acquiring the Origin's speed you need to navigate into the 'HelloOrigin' workspace and run
+To run the example of acquiring the Origin's speed you need to navigate into the ROS2 workspace and run
 ```
 source install/setup.bash
 ros2 run navigation_examples get_2dpose
 ```
 Once the node started it will print the current pose of the robot in the terminal, being its linear position in x and y and its Euler angle around the z-axis (heading). 
 
-The python code of this ROS2 node is found in the 'HelloOrigin/src/navigation_examples/navigation_examples/get_2Dpose.py' and follows the same line of reasoning as for acquiring the velocity with the difference on the frame of this position estimate and how the message is processed in order to retrieve the position and not the velocity. The remainder of this section explains the code in more detail, yet it only explains what is different with respect on the [first example](#acquiring-speed).
+The python code of this ROS2 node is found in the 'navigation_examples/navigation_examples/get_2Dpose.py' and follows the same line of reasoning as for acquiring the velocity with the difference on the frame of this position estimate and how the message is processed in order to retrieve the position and not the velocity. The remainder of this section explains the code in more detail, yet it only explains what is different with respect on the [first example](#acquiring-speed).
 
 The first part of the code, i.e.,
 ```
@@ -143,16 +143,16 @@ is a typical python implementation of linking the main functionality of the pyth
 
 
 ## Setting a reference speed
-This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference).
+This example only requires the Avular Origin robot <u>and not</u> any of its autonomous capabilities as implemented by Avular's Autopilot Inference (it will thus work with the Origin One simulation).
 
-To run the example of setting the Origin's speed you need to navigate into the 'HelloOrigin' workspace and run
+To run the example of setting the Origin's speed you need to navigate into the ROS2 workspace and run
 ```
 source install/setup.bash
 ros2 run navigation_examples set_velocity
 ```
 Once the node started it will request the robot to set the control mode of the robot to USER, sent a forward reference speed of 1 m/s for a duration of 1 second, and then return the control model of the robot to a RELEASED state so that the robot can be controlled by other agents or entities, such as the remote control or the Autopilot Inference. 
 
-The python code of this ROS2 node is found in the 'HelloOrigin/src/navigation_examples/navigation_examples/set_velocity.py' in which two service-clients are created and one publisher.
+The python code of this ROS2 node is found in the 'navigation_examples/navigation_examples/set_velocity.py' in which two service-clients are created and one publisher.
 
 The first part of the code, i.e.,
 ```
