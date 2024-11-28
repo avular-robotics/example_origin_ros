@@ -1,0 +1,42 @@
+#goal definition
+
+# Optional goal pose, if left empty, the computed path ends when the area is covered.
+geometry_msgs/PoseStamped[<=1] goal_pose
+
+# Optional start pose, if left empty, the computed path starts at the current robot pose.
+geometry_msgs/PoseStamped[<=1] start_pose
+
+# The area to cover. If the outline is left empty, the previously set area is considered.
+AreaStamped area_to_cover
+
+# The area allowed to move in. If the outline is left empty, a predefined distance outside the covered area is considered as per configuration of the coverage planner.
+AreaStamped area_allowed
+
+# The infill policy to use for the coverage.
+InfillPolicy policy
+
+---
+#result definition
+
+# The computed path that covers the area.
+nav_msgs/Path path
+
+# The time it took to compute the path.
+builtin_interfaces/Duration planning_time
+
+# Whether the path was successfully computed.
+bool success
+
+# Error message if success is false.
+string message
+
+---
+#feedback definition
+
+uint8 STATUS_UNKNOWN=0
+uint8 STATUS_EXECUTING=1
+uint8 STATUS_PENDING=2
+uint8 STATUS_CANCELLING=3
+
+# Feedback is the action status.
+uint8 status 0

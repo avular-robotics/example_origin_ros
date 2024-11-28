@@ -1,24 +1,21 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+
 <package format="3">
-  <name>knowledge_base_msgs</name>
-  <version>2.2.0</version>
-  <description>Knowledge base message definitions</description>
-
-  <maintainer email="e.nikolla@avular.com">Eleni Nikolla</maintainer>
-  <maintainer email="p.heumen@avular.com">Pasquale van Heumen</maintainer>
-
+  <name>complete_coverage_planner_msgs</name>
+  <version>2.0.0</version>
+  <description>Complete coverage planner message definitions</description>
+  <maintainer email="n.jeurgens@avular.com">NIels Jeurgens</maintainer>
   <license>Avular Confidential</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>cmake_avular</buildtool_depend>
   <buildtool_depend>rosidl_default_generators</buildtool_depend>
 
-  <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
-  <exec_depend>origin_msgs</exec_depend>
-  <exec_depend>autonomy_msgs</exec_depend>
-  <exec_depend>complete_coverage_planner_msgs</exec_depend>
-
+  <depend>nav_msgs</depend>
+  <depend>action_msgs</depend>
+  
   <exec_depend>rosidl_default_runtime</exec_depend>
 
   <member_of_group>rosidl_interface_packages</member_of_group>

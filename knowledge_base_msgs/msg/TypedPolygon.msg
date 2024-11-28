@@ -2,6 +2,7 @@
 # Polygon types
 string GO_AREA = go_area
 string NO_GO_AREA = no_go_area
+string COVER_AREA = cover_area
 string MAP_LAYOUT = map_layout
 
 # Type of polygon, see the enum list above

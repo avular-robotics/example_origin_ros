@@ -50,7 +50,7 @@ class ClientService():
 class SetBehavior(Node):
 
     def __init__(self):
-        super().__init__('velocity_commander')
+        super().__init__('behavior_set_and_executor')
         # create a service-client for setting a behavior to the robot
         self.add_behavior = ClientService(self, srv_type=SetAndExecuteBehaviors, srv_name='/autopilot/information_manager/set_and_execute_behaviors')
         
@@ -98,7 +98,7 @@ def main(args=None):
     
     print("----------------- hello user -----------------------")
     print("define the next behavior")
-    print("move_to_global: 1.0, 1.0, 90.0 ------- [m m deg]")
+    print("move_to_global: 1.0 1.0 90.0 ------- [m m deg]")
     print("move_to_relative: 1.0 1.0 0.0 -------- [m m deg]")
     print("wait: 1.0 ---------------------------- [sec]")
     print("quit --------------------------------- stops node \n")

@@ -1,0 +1,10 @@
+## ROS2 service call to report the mode of the autopilot stack.
+
+### Type of operation
+knowledge_base_msgs/ModesOfOperation mode_of_operation
+
+---
+# Whether the mode has been sent successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

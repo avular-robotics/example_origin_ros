@@ -1,0 +1,15 @@
+# Request:
+
+# Header, defining the coordinate frame of the area.
+std_msgs/Header header
+
+# The area to be set.
+Area area
+---
+# Response:
+
+# True if the area was set successfully.
+bool success
+
+# Error message if success is false.
+string message

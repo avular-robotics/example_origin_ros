@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'perception_examples'
+package_name = 'information_examples'
 
 setup(
     name=package_name,
@@ -15,12 +15,12 @@ setup(
     zip_safe=True,
     maintainer='bep',
     maintainer_email='j.sijs@avular.com',
-    description='Example on the perception of the robot',
+    description='TODO: Package description',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'get_closest = perception_examples.get_closest:main',
+            'set_aruco = information_examples.set_aruco:main',
         ],
     },
 )

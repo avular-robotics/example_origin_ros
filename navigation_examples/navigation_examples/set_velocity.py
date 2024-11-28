@@ -40,8 +40,11 @@ class ClientService():
         else:
             future = self.cli.call_async(request_msg)
             rclpy.spin_until_future_complete(self.node, future)
-            self.node.get_logger().info('service call done')               
-        return future.result()
+            self.node.get_logger().info('service call done')    
+            if hasattr(future, 'result'):
+                return future.result()
+            else:
+                return None
 
 class SetVelocity(Node):
 
@@ -55,6 +58,7 @@ class SetVelocity(Node):
         # create a service for acquiring and releasing control of the robot
         self.request_control = ClientService(self, srv_type=SetControlMode, srv_name='/robot/cmd_vel_controller/set_control_mode')
         self.release_control = ClientService(self, srv_type=ReturnControlMode, srv_name='/robot/cmd_vel_controller/reset_control_mode')
+        # create a timer for publishing the velocity at 10 Hz
         timer_period = 0.1  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)        
         
@@ -73,13 +77,17 @@ def main(args=None):
     req1 = SetControlMode.Request()
     req1.mode.mode = ControlMode.USER
     result = set_velocity.request_control.make_request(request_msg = req1)
-    if result.success == True:
+    if result:
+        success = result.success
+    else:
+        success = False
+    if success:
         set_velocity.get_logger().info('Obtained control of the robot')
         # sent velocity commands
         t_now = set_velocity.get_clock().now().nanoseconds
         t_start = t_now
-        t_old = t_now - 100000000               # miliseconds
-        while t_now - t_start < 1000000000:     # miliseconds
+        t_old = t_now - 100000000               # milliseconds
+        while t_now - t_start < 1000000000:     # milliseconds
             t_now = set_velocity.get_clock().now().nanoseconds
             if t_now - t_old > 99999999:
                 rclpy.spin_once(set_velocity)

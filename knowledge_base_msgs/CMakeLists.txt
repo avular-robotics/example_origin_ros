@@ -12,6 +12,7 @@ find_package(std_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(autonomy_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(complete_coverage_planner_msgs REQUIRED)
 
 
 file(
@@ -27,7 +28,7 @@ rosidl_generate_interfaces(
   ${PROJECT_NAME}
   ${SRVS}
   ${MSGS}
-  DEPENDENCIES std_msgs nav_msgs autonomy_msgs geometry_msgs
+  DEPENDENCIES std_msgs nav_msgs autonomy_msgs geometry_msgs complete_coverage_planner_msgs
 )
 
 ament_export_dependencies(rosidl_default_runtime)

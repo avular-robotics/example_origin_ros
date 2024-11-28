@@ -11,6 +11,7 @@ uint8 NONE=00
 # Manual control modes (1X)
 uint8 MANUAL=10
 uint8 TELEOPS=11
+uint8 MANUAL_MAPPING=12
 
 # Autonomous control modes (2X)
 uint8 AUTOPILOT=20

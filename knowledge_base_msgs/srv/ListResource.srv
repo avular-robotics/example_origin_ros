@@ -6,6 +6,7 @@
 # The response field 'message' is a string elaborating the success value.
 
 string group_uuid
+knowledge_base_msgs/ResourceType type
 ---
 string json
 Result result

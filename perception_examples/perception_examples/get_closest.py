@@ -24,7 +24,7 @@ class GetClosest(Node):
     def __init__(self):
         super().__init__('laserscan_subscriber')
         # create a subscriber to the robot's laserscan topic (published by the autopilot inference)
-        self.laserscan_subscription = self.create_subscription(LaserScan, 'robot/scan_filtered',  self.getclosest_callback, 10)
+        self.laserscan_subscription = self.create_subscription(LaserScan, '/autopilot/lidar/scan_filtered',  self.getclosest_callback, 10)
         self.laserscan_subscription    # prevent unused variable warning
         self.get_logger().info('laserscan subscriber is initialized')
 

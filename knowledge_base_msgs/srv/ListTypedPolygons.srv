@@ -1,4 +1,16 @@
-# Empty request
+# Listing requirements for polygons
+
+# Polygon types
+string GO_AREA = go_area
+string NO_GO_AREA = no_go_area
+string MAP_LAYOUT = map_layout
+
+# Type of polygon, see the enum list above
+string type  # acceptable values  
+
+# uuid of map associated with polygon
+string map_id 
+ 
 ---
 # List of polygons
 knowledge_base_msgs/TypedPolygon[] polygons

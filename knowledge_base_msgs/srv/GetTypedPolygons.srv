@@ -1,0 +1,13 @@
+# Service to retrieve a list of typed polygons from knowledge base
+
+# Id of the polygon to be retrieved
+string[] uuid
+# String name of the saved polygon to be retrieved
+string[] name
+---
+# The requested polygon
+knowledge_base_msgs/TypedPolygon[] polygons
+# Whether the map has been retrieved successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."
