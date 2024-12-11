@@ -144,7 +144,7 @@ def main(args=None):
         marker_id = int(user_input[0:n])
         parameter_list = user_input[n+2:].split()
         if len(parameter_list) == 3:
-            rot_matrix = R.from_euler('zyx', [float(parameter_list[2]), 0, 90.0], degrees=True)
+            rot_matrix = R.from_euler('xyz', [90.0, 0, float(parameter_list[2])], degrees=True)
             quaternion = rot_matrix.as_quat()
             marker_pose = { 
                 'position': {
