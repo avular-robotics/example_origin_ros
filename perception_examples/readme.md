@@ -3,7 +3,7 @@ This package defines a ROS2 node to illustrate a perception principles of the Or
 In the example that is presented in in this package of the [perception examples](perception_examples/readme.md) we will create a ROS2 node that assesses the LaserScan topic of the robot and uses that to acquire a minimum radius around the robot of free space to maneuver. This minimal radius is computed by checking at what angles (in the horizontal plane) the robot will encounter its nearest obstructions along with the distance to these obstructions. This distance can be interpeded as the minimal free space of the robot.
 
 ## get closest obstructions
-This example requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference (it will thus <u>not</u> work with the Origin One in simulation). In addition you will need a the 3D-LiDAR mounted on the Origin.
+<b>This example requires the Avular Origin robot <u>and</u> its autonomous capabilities as implemented by Avular's Autopilot Inference (it will thus <u>not</u> work with the Origin One in simulation). In addition you will need a the 3D-LiDAR mounted on the Origin.</b>
 
 To run the example of acquiring the Origin's closest obstruction(s) you need to navigate into the ROS2 workspace and run
 ```

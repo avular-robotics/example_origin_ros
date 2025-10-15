@@ -1,0 +1,12 @@
+## ROS2 service call to set the Coordinate System Info of the robot.
+## This will delete the old coordinate info from the information manager and immediately republish the new coordinate info message.
+
+
+### CoordinateSystemInfo message to be published in the stack
+autonomy_msgs/CoordinateSystemInfo coord_info
+
+---
+# Whether the msg has been set successfully
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."

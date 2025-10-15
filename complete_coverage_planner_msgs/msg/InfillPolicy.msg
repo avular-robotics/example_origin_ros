@@ -2,6 +2,7 @@
 float32 UNSET_FLOAT_VALUE=-3.4e+38
 
 # The number of contours to plan from the outline of the coverage area inwards. If set to -1, the number of contours is determined by the configuration.
+# NOTE: Currently infill contours are not supported. If this value is set to any other value than -1 it will cause errors and potentially crashes
 int32 number_contours -1
 
 # The number of contours to plan from the outline of the coverage area outwards. If set to -1, the number of outer contours is determined by the configuration.

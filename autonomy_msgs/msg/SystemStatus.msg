@@ -14,3 +14,14 @@ string INACCURATE_POSITION = "inaccurate_position" # indicates that a position i
 string INACCURATE_HEADING = "inaccurate_heading" # indicates that an accurate position estimate is available, but no accurate heading
 string ACCURATE = "accurate" # indicates that an accurate position and orientation are available
 string position_accuracy_status "unknown"
+
+# This boolean indicates if the scheduler is running on the robot. The scheduler when enabled will start scheduled jobs
+# at the specified moments in time
+bool scheduling_enabled false
+
+# The current mode the Autopilot is operating in. The constants are just some of the possible modes of operation;
+# see knowledge_base_msgs/msg/ModeOfOperation for more info
+string DEFAULT = "default"
+string MAPPING = "mapping"
+string MULTIMAP = "multimap"
+string mode_of_operation "default"

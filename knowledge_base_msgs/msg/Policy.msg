@@ -6,7 +6,8 @@ string sentence
 # marker_id on the dock at which needs to be docked
 int64 dock_marker_id -1
 
-# distance when approaching or moving along an object. Note, this was dock_approach_offset
+# distance when approaching or moving along an object. Note, that this refers to the base-link of the robot in the (negative) x-direction.
+# As such, when you want the nose of the Origin robot to just hit the object, then object_distance = 0.5.
 float64 object_distance 1.0
 
 # name of the controller (in controller server) to use

@@ -1,0 +1,7 @@
+## ROS2 service call to get the Coordinate System Info of the robot.
+---
+autonomy_msgs/CoordinateSystemInfo info
+# Whether getting the coordinate system was a success
+bool success false
+# Confirmation or error message
+string message "Unexpected Error. Response message not set."
