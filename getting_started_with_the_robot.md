@@ -15,7 +15,12 @@ CycloneDDS is an alternative to the default ROS2 implementation being FastDDS. C
 2. Export CycloneDDS\
 Exporting CycloneDDS to your bash script ensures that it is automatically being used when opening a new terminal. You may do so by adding `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp` to your .bashrc. When using docker you may use the environmental variables option when starting the docker image.
 3. Instal the Zenoh bridge\
-The Zenoh bridge is used to separate the ROS2 network of the robot, as much as possible, with the ROS2 network on your local machine. The bridge can be run as a standalone binary or in a docker container. Your Origin One will run version `1.4.0` of this Zenoh bridge, which should be compatible with all prior version of `1.x.y`. For downloads and more detailed instructions, see [this website](https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds?tab=readme-ov-file#linux-debian)
+The Zenoh bridge is used to separate the ROS2 network of the robot, as much as possible, with the ROS2 network on your local machine. The bridge can be run as a standalone binary or in a docker container. Your Origin One will run version `1.0.3` of this Zenoh bridge. Therefore, it is prefered that you also install this version, although theoretically it should be compatible with older version, e.q., `1.0.2`, or `1.0.0`. For downloads and more detailed instructions, see [this website](https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds?tab=readme-ov-file#linux-debian).
+``` bash
+    echo "deb [trusted=yes] https://download.eclipse.org/zenoh/debian-repo/ /" | sudo tee -a /etc/apt/sources.list > /dev/null
+    sudo apt update
+    sudo apt install zenoh-bridge-ros2dds=1.0.3
+```
 4. Start the Zenoh bridge\
 To start the Zenoh bridge on you local machine you should run `zenoh-bridge-ros2dds -m client -e tcp/<robot-ip>:7447`. Note that we define a new ROS2 domain. This is not compulsory but may prevent ROS2 communication issues later on.
 5. Check the connection \
