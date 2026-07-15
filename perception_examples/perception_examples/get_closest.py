@@ -14,6 +14,7 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import LaserScan
 
 import numpy as np
@@ -24,7 +25,8 @@ class GetClosest(Node):
     def __init__(self):
         super().__init__('laserscan_subscriber')
         # create a subscriber to the robot's laserscan topic (published by the autopilot inference)
-        self.laserscan_subscription = self.create_subscription(LaserScan, '/autopilot/lidar/scan_filtered',  self.getclosest_callback, 10)
+        qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
+        self.laserscan_subscription = self.create_subscription(LaserScan, '/autopilot/lidar/scan_filtered',  self.getclosest_callback, qos)
         self.laserscan_subscription    # prevent unused variable warning
         self.get_logger().info('laserscan subscriber is initialized')
 

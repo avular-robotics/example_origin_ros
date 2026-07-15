@@ -14,6 +14,7 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 
 from std_msgs.msg import String
 from nav_msgs.msg import Odometry
@@ -26,7 +27,8 @@ class Pose2DSubscriber(Node):
 
     def __init__(self):
         super().__init__('pose2d_subscriber')
-        self.pose_subscription = self.create_subscription(Odometry, 'autopilot/estimated_pose', self.pose_callback, 10)
+        qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
+        self.pose_subscription = self.create_subscription(Odometry, 'autopilot/estimated_pose', self.pose_callback, qos)
         self.pose_subscription  # prevent unused variable warning
         self.get_logger().info('pose subscriber is initialized')
 

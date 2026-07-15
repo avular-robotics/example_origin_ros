@@ -14,6 +14,7 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 
 from autonomy_msgs.msg import CoordinateSystemInfo
 from geometry_msgs.msg import PoseStamped
@@ -36,7 +37,7 @@ class SetBehaviorBase(Node):
         self.mission_executing_callback_group = rclpy.callback_groups.MutuallyExclusiveCallbackGroup()
         self.main_callback_group = rclpy.callback_groups.ReentrantCallbackGroup()
 
-        # define a local state to store values of the robot's global origin 
+        # define a local state to store values of the robot's global origin
         self.coordinate_system_info = {
             "type": 3,
             "local_tangent_plane": {
@@ -45,16 +46,18 @@ class SetBehaviorBase(Node):
                 "altitude": 0.0,
             }
         }
-        # define a local state to store values of the robot's position 
+        # define a local state to store values of the robot's position
         self.robot_pose = PoseStamped()
 
         # create a subscription to the actual values of the global origin that the robot is using
-        self.coord_info_subscription = self.create_subscription(CoordinateSystemInfo, '/autopilot/coordinate_system', self.coordinate_system_callback, 10)
+        coord_info_qos = QoSProfile(depth=10, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        self.coord_info_subscription = self.create_subscription(CoordinateSystemInfo, '/autopilot/coordinate_system', self.coordinate_system_callback, coord_info_qos)
         self.coord_info_subscription  # prevent unused variable warning
         # create a subscription to the (global) pose of the robot
-        self.pose_subscription = self.create_subscription(Odometry, 'autopilot/estimated_pose', self.pose_callback, 10)
+        pose_qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
+        self.pose_subscription = self.create_subscription(Odometry, 'autopilot/estimated_pose', self.pose_callback, pose_qos)
         self.pose_subscription  # prevent unused variable warning
-              
+
         # create a service-client for setting a behavior to the robot
         self.add_behavior = self.create_client(
             srv_type=SetAndExecuteBehaviors,
@@ -67,8 +70,8 @@ class SetBehaviorBase(Node):
             srv_name='/autopilot/information_manager/resource/set',
             callback_group=self.main_callback_group,
         )
-        
-    
+
+
     def coordinate_system_callback(self,msg):
         """
         Function to acquire the coordinate system info and store that on an internal state
@@ -79,16 +82,16 @@ class SetBehaviorBase(Node):
             self.coordinate_system_info["local_tangent_plane"]["latitude"] = msg.latitude
             self.coordinate_system_info["local_tangent_plane"]["longitude"] = msg.longitude
             self.coordinate_system_info["local_tangent_plane"]["altitude"] = msg.altitude
-        
-    
+
+
     def pose_callback(self, msg):
         """
         Function to acquire the robot position and store that on an internal state
         """
         self.robot_pose.header = msg.header
         self.robot_pose.pose = msg.pose.pose
-    
-    
+
+
     async def create_behavior(self, behavior_type, parameters):
         """
             Function to create the actual list of behaviors that can be sent for execution to the robot
@@ -123,14 +126,14 @@ class SetBehaviorBase(Node):
             behaviors.append(behavior)
         else:
             self.get_logger().info('cannot set behavior: unknown type of behavior')
-        
+
         return behaviors
-    
+
 
     def _create_behavior_move_through_poses(self, waypoint, frame):
         """
             Function to create a move_through_pose behaviors, i.e., where the robot will plan a path by itself
-            using the global_costmap (in case of a global waypoint), or the local_costmap (in case of a relative 
+            using the global_costmap (in case of a global waypoint), or the local_costmap (in case of a relative
             waypoint that is within 3 meters of the robot's current position)
         """
         # create the behavior MOVE_THROUGH_POSES with only one pose being its final goal
@@ -188,7 +191,7 @@ class SetBehaviorBase(Node):
             print("[WARNING]: behavior service not available, aborting...")
         else:
             response = await self.save_path.call_async(req)
-    
+
         # create the MOVE_ALONG_PATH behavior if path is saved successfully, otherwise wait
         if response is None or response.result.success == False:
             behavior.type = Behavior.WAIT
@@ -202,12 +205,12 @@ class SetBehaviorBase(Node):
             behavior.policy.max_speed = 1.0
             behavior.policy.max_path_distance = 1.0
             behavior.policy.controller_name = "FollowPathRoughly"           #FollowPathLoosely, FollowPathRoughly, FollowPathStrictly
-            
+
         return behavior
 
 
-    def _compute_straight_path(self, waypoint):    
-        # compute the path as a list of poses, in a straight line, 
+    def _compute_straight_path(self, waypoint):
+        # compute the path as a list of poses, in a straight line,
         # starting from the robot's current pose and ending at the waypoint
         path = []
         pose = {}
@@ -230,5 +233,5 @@ class SetBehaviorBase(Node):
             new_pose["position"]["y"] = self.robot_pose.pose.position.y + (i/N) * dy
             new_pose["position"]["z"] = 0.0
             path.append(new_pose)
-        
+
         return path

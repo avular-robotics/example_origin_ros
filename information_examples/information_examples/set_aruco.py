@@ -14,6 +14,7 @@
 
 import rclpy
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, DurabilityPolicy
 
 from knowledge_base_msgs.msg import Behavior, ResourceType, ModesOfOperation
 from knowledge_base_msgs.srv import ListResource, GetResource, SetResource, DeleteResource, SetRobotCoordInfo
@@ -26,7 +27,7 @@ from scipy.spatial.transform import Rotation as R
 import numpy as np
 
 class ClientService():
-    
+
     def __init__(self, node, srv_type, srv_name):
         self.node = node
         self.cli = self.node.create_client(srv_type=srv_type, srv_name=srv_name)
@@ -43,7 +44,7 @@ class ClientService():
         if future.result() is None:
             return is_called, None
         is_called = True
-        
+
         return is_called, future.result()
 
 
@@ -66,7 +67,8 @@ class SetLtpAndAruco(Node):
         self.delete_information = ClientService(self, srv_type=DeleteResource, srv_name='/autopilot/information_manager/resource/delete')
         self.set_coord_system = ClientService(self, srv_type=SetRobotCoordInfo, srv_name='/autopilot/information_manager/set_stored_robot_coord_info')
         # create subscribers
-        self.subscription_coord_info = self.create_subscription(CoordinateSystemInfo, '/autopilot/coordinate_system', self.coordinate_system_callback, 10)
+        qos = QoSProfile(depth=10, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        self.subscription_coord_info = self.create_subscription(CoordinateSystemInfo, '/autopilot/coordinate_system', self.coordinate_system_callback, qos)
 
     def coordinate_system_callback(self,msg):
         """
@@ -78,7 +80,7 @@ class SetLtpAndAruco(Node):
             self.coordinate_system_info["local_tangent_plane"]["latitude"] = msg.latitude
             self.coordinate_system_info["local_tangent_plane"]["longitude"] = msg.longitude
             self.coordinate_system_info["local_tangent_plane"]["altitude"] = msg.altitude
-    
+
     def print_all_markers(self):
         """Function to acquire all markers that already exists in the database"""
         # list all known markers from the knowledge base
@@ -93,8 +95,8 @@ class SetLtpAndAruco(Node):
         else:
             print("\n--> Could not find any marker in the database, or did not receive a response from the database")
             return
-        
-        # acquire the information from the knowledge base per marker and memorize that information of it matches our marker_id  
+
+        # acquire the information from the knowledge base per marker and memorize that information of it matches our marker_id
         for item in marker_list:
             req = GetResource.Request()
             req.uuid = str(item['resource']['id'])
@@ -116,9 +118,9 @@ class SetLtpAndAruco(Node):
             else:
                 print("\n--> Could not obtain the information for one specific marker")
         return
-        
-    
-    
+
+
+
     def create_marker_dict(self, marker_id, marker_pose):
         """Function to check if the marker already exists in the database, and thus we should delete it"""
         is_existing = False
@@ -133,7 +135,7 @@ class SetLtpAndAruco(Node):
             marker_list = []
             if is_called:
                 marker_list = json.loads(response.json)
-            # acquire the information from the knowledge base per marker and memorize that information of it matches our marker_id  
+            # acquire the information from the knowledge base per marker and memorize that information of it matches our marker_id
             for item in marker_list:
                 req = GetResource.Request()
                 req.uuid = str(item['resource']['id'])
@@ -172,7 +174,7 @@ def main(args=None):
     print("\n-----------------------------------------------------------------------")
     print("----------------------------- hello user ------------------------------")
     print("-----------------------------------------------------------------------")
-    
+
     # at first check if the user wants to set a new coordinate system for the robot
     correct_input = False
     while not correct_input:
@@ -188,7 +190,7 @@ def main(args=None):
                 print("51.4535656 5.4485949 64.14")
                 user_input = input("\nWhat values would you like to set: ")
                 parameter_list = user_input.split()
-                
+
                 # store the new lat lon and alt into the robot's database
                 if user_input[0:4] == 'quit':
                     correct_nr_parameters = True
@@ -216,7 +218,7 @@ def main(args=None):
                     print(feedback)
                 else:
                     print('\nThe input was not of the right format. Please try again, or type "quit"')
-        
+
         # if the user does not want to set a new coordinate system, then wait until the robot has published its coordinate system
         elif user_input[0] == 'n':
             correct_input = True
@@ -224,16 +226,16 @@ def main(args=None):
                 print('\n--> Waiting to receive coordinate system info that is not of the type UNKNOWN ... press ctrl-c to kill waiting (and node)')
                 rclpy.spin_once(set_ltp_aruco)
                 print('\r--> Received new ROS2 messages ... processing')
-       
+
         # if the input is not one of the above 2 option, then try again
         else:
             print("unknown input")
-    
+
     print("\n-----------------------------------------------------------------------")
     print("-------------------- acquire current Aruco markers --------------------")
     print("-----------------------------------------------------------------------")
     set_ltp_aruco.print_all_markers()
-    
+
     # next, continue to storing aruco markers
     print("\n------------------------------------------------------------------------")
     print("------------------------- store aruco markers --------------------------")
@@ -249,14 +251,14 @@ def main(args=None):
         n = user_input.find(":")
         marker_id = int(user_input[0:n])
         parameter_list = user_input[n+2:].split()
-        
+
         # check if the user provided the marker and position values in the right format
         if len(parameter_list) == 3:
             rot_matrix = R.from_euler('xyz', [90.0, 0, float(parameter_list[2])], degrees=True)
             quaternion = rot_matrix.as_quat()
-            marker_pose = { 
+            marker_pose = {
                 'position': {
-                    'x': float(parameter_list[0]), 
+                    'x': float(parameter_list[0]),
                     'y': float(parameter_list[1]),
                     'z': 0.3,
                 },
@@ -271,7 +273,7 @@ def main(args=None):
             # check if the marker is already known to the robot, and create the proper dictonary format of a marker
             [is_existing, marker_dict] = set_ltp_aruco.create_marker_dict(marker_id, marker_pose)
             is_deleted = False
-            
+
             if is_existing:
                 # delete the old marker if it already exists
                 req = DeleteResource.Request()
@@ -296,16 +298,16 @@ def main(args=None):
             print(feedback)
         else:
             print("--> Unknown user input")
-        
+
         user_input = input("\nWhat new Aruco marker would you like to set (or type 'quit' to stop): ")
-        
-    
+
+
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)    
+    # when the garbage collector destroys the node object)
     set_ltp_aruco.destroy_node()
     rclpy.shutdown()
 
-    
+
 if __name__ == '__main__':
     main()
